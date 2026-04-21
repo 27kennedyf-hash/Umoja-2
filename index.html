@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umoja – YIS Cultural Celebration</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --gold: #E8A020;
+    --deep: #1a0a2e;
+    --purple: #3d1a6e;
+    --coral: #e05a3a;
+    --teal: #1a8c7a;
+    --cream: #fdf8f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--deep); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(26,10,46,0.92);
+    backdrop-filter: blur(10px);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0a2e 0%, #3d1a6e 40%, #1a4a3e 100%);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(232,160,32,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(224,90,58,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 80%, rgba(26,140,122,0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    border: 1px solid rgba(232,160,32,0.4);
+    padding: 0.4rem 1.2rem; border-radius: 50px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 18vw, 14rem);
+    line-height: 0.9; letter-spacing: -2px; position: relative;
+    background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: rgba(255,255,255,0.75);
+    margin: 1.5rem 0 1rem;
+    letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 300; position: relative;
+  }
+  .hero-meaning {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 1.1rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 3rem; position: relative;
+  }
+  .btn {
+    display: inline-block; padding: 1rem 2.5rem;
+    background: var(--gold); color: var(--deep);
+    text-decoration: none; font-weight: 600;
+    border-radius: 50px; letter-spacing: 1px;
+    font-size: 0.9rem; text-transform: uppercase;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(232,160,32,0.4); }
+  .btn-outline {
+    background: transparent; color: #fff;
+    border: 2px solid rgba(255,255,255,0.5); margin-left: 1rem;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); box-shadow: none; }
+  .scroll-hint {
+    position: absolute; bottom: 2rem;
+    color: rgba(255,255,255,0.4); font-size: 0.75rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    pointer-events: none;
+  }
+  .scroll-hint::after { content: '↓'; animation: bounce 2s infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem; }
+  .section-body { font-size: 1.1rem; line-height: 1.9; color: #444; max-width: 680px; }
+  .divider { width: 60px; height: 3px; background: var(--gold); margin: 1.5rem 0; border-radius: 2px; }
+
+  /* WHAT IS UMOJA */
+  .what { background: #fff; }
+  .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .what-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .culture-card {
+    background: linear-gradient(135deg, var(--purple), var(--deep));
+    border-radius: 16px; padding: 1.5rem;
+    color: #fff; text-align: center; transition: transform 0.3s;
+  }
+  .culture-card:hover { transform: translateY(-4px); }
+  .culture-card:nth-child(2) { background: linear-gradient(135deg, var(--coral), #c0392b); margin-top: 1.5rem; }
+  .culture-card:nth-child(3) { background: linear-gradient(135deg, var(--teal), #0e6b5a); margin-top: -1.5rem; }
+  .culture-card:nth-child(4) { background: linear-gradient(135deg, #8b5e3c, #6b3a1f); }
+  .culture-card .emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+  .culture-card p { font-size: 0.85rem; opacity: 0.85; }
+
+  /* WHY YIS */
+  .why { background: var(--deep); color: #fff; }
+  .why .section-body { color: rgba(255,255,255,0.7); }
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .value-card { border: 1px solid rgba(232,160,32,0.25); border-radius: 16px; padding: 2rem; transition: border-color 0.3s, background 0.3s; }
+  .value-card:hover { border-color: var(--gold); background: rgba(232,160,32,0.05); }
+  .value-word { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 0.75rem; }
+  .value-card p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.7; }
+
+  /* EXPERIENCE */
+  .experience { background: var(--cream); }
+  .video-intro { font-size: 1.1rem; line-height: 1.9; color: #444; max-width: 680px; margin-bottom: 3rem; }
+  .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .video-card {
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    background: #000; aspect-ratio: 16/9;
+    position: relative; display: block;
+    text-decoration: none;
+  }
+  .video-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s, opacity 0.3s; }
+  .video-card:hover img { transform: scale(1.04); opacity: 0.7; }
+  .video-overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center; gap: 0.75rem;
+  }
+  .play-btn {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: rgba(232,160,32,0.92);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .video-card:hover .play-btn { transform: scale(1.12); box-shadow: 0 8px 32px rgba(232,160,32,0.5); }
+  .play-btn svg { margin-left: 5px; }
+  .video-year { color: #fff; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+  .video-label { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #888; margin-top: 0.75rem; }
+  .video-wrapper { display: flex; flex-direction: column; }
+
+  /* SIGN UP */
+  .signup { background: linear-gradient(135deg, var(--teal) 0%, var(--purple) 100%); text-align: center; color: #fff; }
+  .signup .section-title { color: #fff; }
+  .signup .section-body { color: rgba(255,255,255,0.8); margin: 0 auto 2.5rem; }
+  .signup-note { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 1.5rem; }
+
+  /* FOOTER */
+  footer { background: var(--deep); color: rgba(255,255,255,0.5); text-align: center; padding: 2.5rem; font-size: 0.85rem; }
+  footer strong { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .what-grid, .values-grid, .video-grid { grid-template-columns: 1fr; }
+    .what-visual { grid-template-columns: 1fr 1fr; }
+    .culture-card:nth-child(2), .culture-card:nth-child(3) { margin-top: 0; }
+    .btn-outline { margin-left: 0; margin-top: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Umoja</div>
+  <ul class="nav-links">
+    <li><a href="#what">About</a></li>
+    <li><a href="#why">YIS Values</a></li>
+    <li><a href="#experience">Watch</a></li>
+    <li><a href="#signup">Join Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Yokohama International School Presents</div>
+  <h1>Umoja</h1>
+  <p class="hero-sub">A Celebration of Culture, Community & Performance</p>
+  <p class="hero-meaning">"Umoja" — Swahili for <em>Unity</em></p>
+  <div>
+    <a href="#signup" class="btn">Get Involved</a>
+    <a href="#what" class="btn btn-outline">Learn More</a>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- WHAT IS UMOJA -->
+<section class="what" id="what">
+  <div class="container">
+    <div class="what-grid">
+      <div>
+        <p class="section-label">About the Event</p>
+        <h2 class="section-title">What is Umoja?</h2>
+        <div class="divider"></div>
+        <p class="section-body">Umoja is YIS's celebration of the incredible cultural diversity within our school community. Inspired by the spirit of Culturama — a beloved tradition at UWCSEA in Singapore — Umoja brings that same magic to Yokohama.</p>
+        <br>
+        <p class="section-body">Through dance, music, storytelling, and performance, students take the audience on a journey across continents and cultures — not as observers, but as participants. Every act is student-led, student-driven, and deeply personal.</p>
+        <br>
+        <p class="section-body">It is a vibrant tapestry woven from the unique threads of every nationality, language, and tradition represented at YIS — a reminder that our differences are not just welcome here, they are celebrated.</p>
+      </div>
+      <div class="what-visual">
+        <div class="culture-card">
+          <div class="emoji">🎭</div>
+          <p>Student-led performances</p>
+        </div>
+        <div class="culture-card">
+          <div class="emoji">🌍</div>
+          <p>Cultures from around the world</p>
+        </div>
+        <div class="culture-card">
+          <div class="emoji">🎶</div>
+          <p>Music, dance & storytelling</p>
+        </div>
+        <div class="culture-card">
+          <div class="emoji">🤝</div>
+          <p>Community & belonging</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY YIS -->
+<section class="why" id="why">
+  <div class="container">
+    <p class="section-label">Our Foundation</p>
+    <h2 class="section-title">Why Umoja at YIS?</h2>
+    <div class="divider"></div>
+    <p class="section-body">At YIS, everything we do is guided by three powerful words: <strong style="color:var(--gold)">Live. Learn. Lead.</strong> Umoja is these values in action — a living, breathing expression of what it means to be part of this community.</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-word">Live</div>
+        <p>Umoja celebrates individuality and belonging. It gives every student a stage to share who they are, where they come from, and what makes them unique — fully alive in their own story.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-word">Learn</div>
+        <p>Watching and performing in Umoja opens windows to cultures we may never have encountered. Every act is an opportunity to deepen our understanding of the world and of each other.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-word">Lead</div>
+        <p>Students don't just perform — they organise, choreograph, direct, and inspire. Umoja is a leadership experience from the first rehearsal to the final bow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="container">
+    <p class="section-label">See It For Yourself</p>
+    <h2 class="section-title">What Does It Look Like?</h2>
+    <div class="divider"></div>
+    <p class="video-intro">Umoja is coming to YIS — but its spirit has been alive at UWCSEA in Singapore for years under the name Culturama. Watch some of these incredible past performances to get a feel for the energy, artistry, and joy that Umoja will bring to our stage.</p>
+    <div class="video-grid">
+      <div class="video-wrapper">
+        <a class="video-card" href="https://youtu.be/rrn5bhkI1XA" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/rrn5bhkI1XA/maxresdefault.jpg" alt="Culturama 2023">
+          <div class="video-overlay">
+            <div class="play-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <span class="video-year">Culturama 2023</span>
+          </div>
+        </a>
+        <p class="video-label">Culturama 2023 — UWCSEA East</p>
+      </div>
+      <div class="video-wrapper">
+        <a class="video-card" href="https://youtu.be/m8Cf1lucjEY" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/m8Cf1lucjEY/maxresdefault.jpg" alt="Culturama 2022">
+          <div class="video-overlay">
+            <div class="play-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <span class="video-year">Culturama 2022</span>
+          </div>
+        </a>
+        <p class="video-label">Culturama 2022 — UWCSEA East</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGN UP -->
+<section class="signup" id="signup">
+  <div class="container">
+    <p class="section-label" style="color:rgba(255,255,255,0.6)">Ready to Be Part of It?</p>
+    <h2 class="section-title">Join Umoja</h2>
+    <div class="divider" style="margin:1.5rem auto;"></div>
+    <p class="section-body">Whether you want to perform, choreograph, play music, or help behind the scenes — there is a place for you in Umoja. All cultures, all talents, all backgrounds are welcome. This is your stage.</p>
+    <a href="YOUR_SIGNUP_LINK_HERE" class="btn" style="font-size:1rem; padding:1.1rem 3rem;">Sign Up Now</a>
+    <p class="signup-note">Sign-up form coming soon. Check back here or speak to your activities coordinator.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Umoja</strong> — A YIS Cultural Celebration</p>
+  <p style="margin-top:0.5rem;">Yokohama International School · Yokohama, Japan</p>
+  <p style="margin-top:0.5rem; font-size:0.75rem;">Inspired by the spirit of Culturama at UWCSEA, Singapore</p>
+</footer>
+
+</body>
+</html>
